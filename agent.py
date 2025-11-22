@@ -99,7 +99,7 @@ def create_agent():
     tools = [
         Tool(
             name="Calculator",
-            func=calculator,
+            func=calculator_tool,
             description="Useful for performing mathematical calculations. Input should be a valid mathematical expression."
         ),
         Tool(
