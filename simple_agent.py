@@ -69,33 +69,55 @@ class SimpleAgent:
 
 # Tool functions
 def calculator_tool(input_str):
-    """Simple calculator tool."""
-    # Extract numbers and operators from the string
+    """Simple calculator tool - uses safe evaluation without eval()."""
     import re
+    import operator
     
-    # Try to find a complete mathematical expression
-    # Remove everything that's not a number, operator, parenthesis, or dot
-    expr = re.sub(r'[^0-9+\-*/().\s]', '', input_str)
+    # Allowed operators
+    ops = {
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv,
+    }
+    
+    # Remove everything that's not a number, operator, or whitespace
+    expr = re.sub(r'[^0-9+\-*/.\s]', '', input_str)
     expr = expr.strip()
     
-    if expr and any(c.isdigit() for c in expr):
-        try:
-            result = eval(expr, {"__builtins__": {}}, {})
-            return f"The result is: {result}"
-        except Exception as e:
-            # If full expression fails, try simple two-number operation
-            match = re.search(r'(\d+(?:\.\d+)?)\s*([+\-*/])\s*(\d+(?:\.\d+)?)', input_str)
-            if match:
-                try:
-                    num1, operator, num2 = match.groups()
-                    simple_expr = f"{num1}{operator}{num2}"
-                    result = eval(simple_expr, {"__builtins__": {}}, {})
-                    return f"The result is: {result}"
-                except Exception:
-                    return f"Error in calculation: {str(e)}"
-            return f"Error in calculation: {str(e)}"
+    if not expr or not any(c.isdigit() for c in expr):
+        return "No valid mathematical expression found."
     
-    return "No valid mathematical expression found."
+    try:
+        # For simple expressions, use a basic parser
+        # This handles expressions like "5+5", "10*2", "100+50-25"
+        # Split by operators while keeping them
+        tokens = re.findall(r'(\d+\.?\d*|[+\-*/])', expr)
+        
+        if not tokens:
+            return "No valid mathematical expression found."
+        
+        # Start with the first number
+        result = float(tokens[0]) if '.' in tokens[0] else int(tokens[0])
+        
+        # Process operator-number pairs
+        i = 1
+        while i < len(tokens) - 1:
+            op = tokens[i]
+            next_num = float(tokens[i+1]) if '.' in tokens[i+1] else int(tokens[i+1])
+            
+            if op in ops:
+                result = ops[op](result, next_num)
+            i += 2
+        
+        # Return integer if possible, otherwise float
+        if isinstance(result, float) and result.is_integer():
+            result = int(result)
+        
+        return f"The result is: {result}"
+    
+    except Exception as e:
+        return f"Error in calculation: {str(e)}"
 
 
 def search_tool(query):

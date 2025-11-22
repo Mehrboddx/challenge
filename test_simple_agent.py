@@ -49,9 +49,11 @@ def test_datetime_tool():
     """Test the datetime tool."""
     print("Testing datetime tool...")
     
+    from datetime import datetime
+    
     result = datetime_tool("What time is it?")
     assert "Current date and time:" in result
-    assert "2025" in result  # Current year
+    assert str(datetime.now().year) in result  # Current year
     
     print("✓ DateTime tool tests passed")
 
