@@ -40,7 +40,7 @@ def calculator_tool(input_str: str) -> str:
         # For simple expressions, use a basic parser
         # This handles expressions like "5+5", "10*2", "100+50-25"
         # Split by operators while keeping them
-        tokens = re.findall(r'(\d+\.?\d*|[+\-*/])', expr)
+        tokens = re.findall(r'(\d+(?:\.\d+)?|[+\-*/])', expr)
         
         if not tokens:
             return "No valid mathematical expression found."
