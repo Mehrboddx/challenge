@@ -6,6 +6,10 @@ external API keys. It shows the concept of an agent making decisions
 and using tools.
 """
 
+import re
+import operator
+from datetime import datetime
+
 
 class SimpleTool:
     """A simple tool that the agent can use."""
@@ -76,9 +80,6 @@ def calculator_tool(input_str):
     operator precedence. For example, '2 + 3 * 4' computes as (2 + 3) * 4 = 20.
     This is intentional to keep the implementation simple and secure.
     """
-    import re
-    import operator
-    
     # Allowed operators
     ops = {
         '+': operator.add,
@@ -147,7 +148,6 @@ def search_tool(query):
 
 def datetime_tool(query):
     """Get current date and time."""
-    from datetime import datetime
     now = datetime.now()
     return f"Current date and time: {now.strftime('%Y-%m-%d %H:%M:%S')}"
 

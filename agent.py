@@ -6,6 +6,8 @@ for the agenticAI challenge.
 """
 
 import os
+import re
+import operator
 from dotenv import load_dotenv
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain.agents import Tool
@@ -24,9 +26,6 @@ def calculator_tool(input_str: str) -> str:
     operator precedence. For example, '2 + 3 * 4' computes as (2 + 3) * 4 = 20.
     This is intentional to keep the implementation simple and secure.
     """
-    import re
-    import operator
-    
     # Allowed operators
     ops = {
         '+': operator.add,

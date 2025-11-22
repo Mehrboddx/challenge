@@ -9,6 +9,7 @@ These tests verify that the agent can correctly:
 
 import sys
 import os
+from datetime import datetime
 
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -48,8 +49,6 @@ def test_search_tool():
 def test_datetime_tool():
     """Test the datetime tool."""
     print("Testing datetime tool...")
-    
-    from datetime import datetime
     
     result = datetime_tool("What time is it?")
     current_year = datetime.now().year
