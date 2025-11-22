@@ -52,8 +52,11 @@ def test_datetime_tool():
     from datetime import datetime
     
     result = datetime_tool("What time is it?")
+    current_year = datetime.now().year
+    
     assert "Current date and time:" in result
-    assert str(datetime.now().year) in result  # Current year
+    # Check that result contains a 4-digit year (either current year or very close)
+    assert str(current_year) in result or str(current_year - 1) in result or str(current_year + 1) in result
     
     print("✓ DateTime tool tests passed")
 

@@ -35,7 +35,7 @@ class SimpleAgent:
         if any(word in query_lower for word in ["time", "date", "when"]):
             return "DateTime"
         # Check for calculation keywords or operators
-        elif any(word in query_lower for word in ["calculate", "math"]) or any(op in query for op in ["+", "-", "*", "/"]):
+        elif any(word in query_lower for word in ["calculate", "math"]) or any(op in query_lower for op in ["+", "-", "*", "/"]):
             return "Calculator"
         # Default to search for informational queries
         elif any(word in query_lower for word in ["search", "what", "who", "define", "is"]):
