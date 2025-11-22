@@ -129,13 +129,15 @@ challenge/
 ## 🔧 Available Tools
 
 ### Simple Agent Tools:
-- **Calculator**: Performs mathematical calculations
+- **Calculator**: Performs mathematical calculations (left-to-right evaluation, no operator precedence)
 - **Search**: Searches a predefined knowledge base
 - **DateTime**: Returns current date and time
 
 ### LangChain Agent Tools:
-- **Calculator**: Advanced mathematical operations
+- **Calculator**: Mathematical operations (left-to-right evaluation, no operator precedence)
 - **Search**: Information retrieval about AI and LangChain concepts
+
+**Note**: The calculator tools process operations from left to right without standard operator precedence. For example, `2 + 3 * 4` computes as `(2 + 3) * 4 = 20` instead of `2 + (3 * 4) = 14`. This is intentional to keep the implementation simple and secure without using `eval()`.
 
 ## 🎓 Learning Resources
 

@@ -69,7 +69,13 @@ class SimpleAgent:
 
 # Tool functions
 def calculator_tool(input_str):
-    """Simple calculator tool - uses safe evaluation without eval()."""
+    """
+    Simple calculator tool - uses safe evaluation without eval().
+    
+    Note: This calculator processes operations left-to-right without 
+    operator precedence. For example, '2 + 3 * 4' computes as (2 + 3) * 4 = 20.
+    This is intentional to keep the implementation simple and secure.
+    """
     import re
     import operator
     

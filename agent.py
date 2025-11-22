@@ -17,7 +17,13 @@ load_dotenv()
 
 
 def calculator_tool(input_str: str) -> str:
-    """Simple calculator tool for the agent - uses safe evaluation."""
+    """
+    Simple calculator tool for the agent - uses safe evaluation.
+    
+    Note: This calculator processes operations left-to-right without 
+    operator precedence. For example, '2 + 3 * 4' computes as (2 + 3) * 4 = 20.
+    This is intentional to keep the implementation simple and secure.
+    """
     import re
     import operator
     
